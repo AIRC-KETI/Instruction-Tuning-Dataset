@@ -1,0 +1,213 @@
+dataset: anli
+templates:
+  0cc3ae39-3997-4686-8c93-5d51457efa1f: !Template
+    answer_choices: 맞습니다. ||| 결론이 나지 않습니다. ||| 틀렸습니다.
+    id: 0cc3ae39-3997-4686-8c93-5d51457efa1f
+    jinja: '{{premise}} 이 설명과 세상에 대해 알고 있는 지식만을 사용하여, "{{hypothesis}}"는 확실히 맞습니까, 틀렸습니까, 아니면 결론이 나지 않습니까? |||
+      {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: MNLI crowdsource
+    reference: Adapted from Williams et al. 2018's instructions to crowdsourcing workers.
+  179eb863-3ece-4e6f-af0f-fcb46d997306: !Template
+    answer_choices: 예 ||| 모릅니다 ||| 아니요
+    id: 179eb863-3ece-4e6f-af0f-fcb46d997306
+    jinja: '{{premise}}가 주어졌을 때, "{{hypothesis}}"는 참이라고 가정할 수 있나요? 예, 아니요, 모릅니다 중 하나로 답변하세요. ||| {{ answer_choices[label] }} '
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: should assume
+    reference: Webson & Pavlick 2021
+  5459237b-97de-4340-bf7b-2939c3f7ca19: !Template
+    answer_choices: 맞습니다 ||| 모릅니다 ||| 틀립니다
+    id: 5459237b-97de-4340-bf7b-2939c3f7ca19
+    jinja: '이 {{premise}}를 봤을 때 {{hypothesis}}는 맞나요, 틀리나요, 모르나요?
+      ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: does it follow that
+    reference: Sanh et al. 2021
+  620aa3fc-d5eb-46f5-a1ee-4c754527aa97: !Template
+    answer_choices: 참입니다 ||| 알 수 없습니다 ||| 거짓입니다
+    id: 620aa3fc-d5eb-46f5-a1ee-4c754527aa97
+    jinja: '{{premise}}
+
+      질문: {{hypothesis}}는 참인가, 거짓인가, 아니면 알 수 없나? ||| {{ answer_choices[label]
+      }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: GPT-3 style
+    reference: 'Same as reported in Figure G7 of the GPT-3 paper, except that there
+      is no task identifying tokens like "anli R1: ".'
+  9b613182-c6ab-4427-9221-3d68f6d62765: !Template
+    answer_choices: 예 ||| 알 수 없습니다 ||| 아니요
+    id: 9b613182-c6ab-4427-9221-3d68f6d62765
+    jinja: '{{premise}} 이전 문장에 따르면, "{{hypothesis}}"이 사실인가요?
+      예, 아니요, 알 수 없습니다 중 하나를 고르세요. ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: based on the previous passage
+    reference: "Adapted from the BoolQ prompts in Schick & Sch\xFCtze 2021."
+  a850110d-f1a3-49b4-949a-d3bfe9f81344: !Template
+    answer_choices: 예 ||| 아마도요 ||| 아니요
+    id: a850110d-f1a3-49b4-949a-d3bfe9f81344
+    jinja: '{{premise}} "{{hypothesis}}"이라고 말하는 것이 옳은가요? (예 / 아니요 / 아마도요) ||| {{ answer_choices[label] }} '
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: justified in saying
+    reference: Webson & Pavlick 2021
+  bab86d5a-4f9c-40db-b619-a7b7d5cae681: !Template
+    answer_choices: 참이다 ||| 결정할 수 없다 ||| 거짓이다
+    id: bab86d5a-4f9c-40db-b619-a7b7d5cae681
+    jinja: '다음 문장을 참이라고 하자: {{premise}}
+
+      그렇다면 "{{hypothesis}}"은 참인가, 거짓인가, 결정할 수 없는가? ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: take the following as truth
+    reference: Sanh et al. 2021
+  bcd90047-3a2b-426b-b065-8a418f1317b8: !Template
+    answer_choices: 예 맞습니다 ||| 장담할 수 없습니다 ||| 아니요 틀립니다
+    id: bcd90047-3a2b-426b-b065-8a418f1317b8
+    jinja: '{{premise}}를 생각하면, "{{hypothesis}}"가 맞는 것임에 틀림이 없습니까?
+      예 맞습니다, 아니요 틀립니다, 장담할 수 없습니다 중 하나로 대답하세요. ||| {{ answer_choices[label] }} '
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: must be true
+    reference: Sanh et al. 2021
+  c4ed37ae-d7d7-4197-a725-ef2152fa3b1f: !Template
+    answer_choices: 네 ||| 아마도 ||| 아니요
+    id: c4ed37ae-d7d7-4197-a725-ef2152fa3b1f
+    jinja: '{{premise}} 우리가 "{{hypothesis}}"라고 추론할 수 있는가? 네, 아니요, 아마도?
+      ||| {{ answer_choices[label] }} '
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: can we infer
+    reference: Webson & Pavlick 2021
+  ca24b93a-6265-462f-b140-e329c03d94fa: !Template
+    answer_choices: 확실하다 ||| 가능하다 ||| 불가능하다
+    id: ca24b93a-6265-462f-b140-e329c03d94fa
+    jinja: "{{premise}}가 참이라고 가정하자.\n\n\
+      그럼, \"{{hypothesis}}\"는 {{\"확실\"}}한가, {{\"가능\"}}한가, 아님 {{\"불가능\"}}한가? ||| {{ answer_choices[label] }}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: guaranteed/possible/impossible
+    reference: Sanh et al. 2021
+  dbc68425-5c42-43ae-9748-70ce8c5a167e: !Template
+    answer_choices: 항상 참이다 ||| 때때로 참이다 ||| 절대 참이 아니다
+    id: dbc68425-5c42-43ae-9748-70ce8c5a167e
+    jinja: "{{premise}}가 참이라고 가정하면, \"{{hypothesis}}\"는 {{\"항상\"}} 참인가, {{\"때때로\"}} 참인가, 아님 {{\"절대\"}} 참이 아닌가? ||| {{ answer_choices[label] }}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: always/sometimes/never
+    reference: Sanh et al. 2021
+  e5b7fdd7-fdff-4630-889b-3c7a052e5da0: !Template
+    answer_choices: 네 ||| 잘 모르겠습니다 ||| 아니요
+    id: e5b7fdd7-fdff-4630-889b-3c7a052e5da0
+    jinja: "{{premise}}\n\n질문: 이것은 \"{{hypothesis}}\"을 의미합니까? \
+      네, 아니요, 잘 모르겠습니다. ||| {{answer_choices[label]}}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: does this imply
+    reference: Sanh et al. 2021
+  e6f32b9c-7e0b-474a-a0d2-e84d20c22aba: !Template
+    answer_choices: 항상 정확합니다 ||| 가끔 정확합니다 ||| 전혀 정확하지 않습니다
+    id: e6f32b9c-7e0b-474a-a0d2-e84d20c22aba
+    jinja: "{{premise}}\n\n\
+      위 텍스트를 염두에 두고, 다음을 고려하자: {{hypothesis}} 이것이 {{\"항상\"}} 정확합니까, {{\"가끔\"}} 정확합니까, 혹은 {{\"전혀\"}} 정확하지 않습니까? ||| \
+      {{ answer_choices[label] }}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: consider always/sometimes/never
+    reference: Sanh et al. 2021
+  ec249357-e672-4e7d-b8b6-d97ed7d090c5: !Template
+    answer_choices: 참 ||| 결정할 수 없음 ||| 거짓
+    id: ec249357-e672-4e7d-b8b6-d97ed7d090c5
+    jinja: '{{premise}} 이 정보로 생각해보자: "{{hypothesis}}"는 {{"참"}}, {{"거짓"}}, {{"결정할 수 없음"}} 중 무엇인가? ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: claim true/false/inconclusive
+    reference: Sanh et al. 2021
+  ffa0a6f0-7186-4ccb-bb35-8b1affb747a0: !Template
+    answer_choices: 사실입니다 ||| 사실일 수도 있습니다 ||| 사실이 아닙니다
+    id: ffa0a6f0-7186-4ccb-bb35-8b1affb747a0
+    jinja: '주어진 {{premise}}에서 "{{hypothesis}}"라는 것이 사실인가요?
+      사실입니다, 사실이 아닙니다, 사실일수도 있습니다 중 하나를 골라 답하세요. ||| {{ answer_choices[label] }} '
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: guaranteed true
+    reference: Webson & Pavlick 2021

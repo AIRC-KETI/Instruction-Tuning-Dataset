@@ -1,0 +1,302 @@
+dataset: hellaswag
+templates:
+  00caa8cb-7f67-43bc-9e90-fc1d5d329432: !Template
+    answer_choices: '{{ endings | join(" ||| ") }}'
+    id: 00caa8cb-7f67-43bc-9e90-fc1d5d329432
+    jinja: '적절한 결말로 설명을 완성하세요:
+
+      먼저, {{ ctx_a.lower() }} 그러다가, {{ ctx_b.lower() }} ...
+
+
+      (a) {{ answer_choices[0] }}
+
+
+      (b) {{ answer_choices[1] }}
+
+
+      (c) {{ answer_choices[2] }}
+
+
+      (d) {{ answer_choices[3] }}
+
+      |||
+
+      {{ answer_choices[label | int()] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: complete_first_then
+    reference: ''
+  196a016d-bd25-4387-90b9-53197fd43b1e: !Template
+    answer_choices: null
+    id: 196a016d-bd25-4387-90b9-53197fd43b1e
+    jinja: '이 문장의 주제는 무엇인가: {{ctx}}
+    
+      |||
+      
+      {{activity_label}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Topic without the ending answer
+    reference: Generate the topic sentence with only the starting sentence
+  1fd44f45-d0e6-41ad-a01f-737f4c53645b: !Template
+    answer_choices: '{{ endings | join(" ||| ")}}'
+    id: 1fd44f45-d0e6-41ad-a01f-737f4c53645b
+    jinja: '문장을 이어서 완성하시오: {{ctx}}
+
+      |||
+
+      {{answer_choices[label | int()]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Open-ended completion
+    reference: Template for open-ended common sense completion
+  4ebf22a1-2d23-426c-a083-b43fc8567687: !Template
+    answer_choices: null
+    id: 4ebf22a1-2d23-426c-a083-b43fc8567687
+    jinja: '{{ctx}} {{ endings[label | int()] }}
+      
+      이 글의 주제가 뭐야?
+      
+      |||
+      
+      {{activity_label}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Topic of the context
+    reference: List the activity label as the topic from the sentence
+  52fbd075-46cb-49fb-a41b-00a0f4a60285: !Template
+    answer_choices: '{{ endings | join(" ||| ") }}'
+    id: 52fbd075-46cb-49fb-a41b-00a0f4a60285
+    jinja: '{% set prompts = [
+      ''문장의 올바른 결말을 선택하세요: '',
+      ''이번 주 숙제는 이 문장의 뒤를 이을 적절한 문장을 찾는 거야: '',
+      ''이 문장은 어떻게 끝나나요? '',
+      ''아래 설명된 결말 목록에서 문장에 가장 적합한 결말은 무엇입니까? '',] %}
+
+      {{prompts | choice}}
+
+      {{ctx}}
+
+
+      (a)  {{answer_choices[0]}}
+
+
+      (b)  {{answer_choices[1]}}
+
+
+      (c)  {{answer_choices[2]}}
+
+
+      (d)  {{answer_choices[3]}}
+
+      |||
+
+      {{answer_choices [label | int()]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Randomized prompts template
+    reference: Original task template with randomized prompt template
+  663470b8-3fab-449c-84ab-6c4738da51b3: !Template
+    answer_choices: 잘 이어집니다 ||| 잘 이어지지 않습니다
+    id: 663470b8-3fab-449c-84ab-6c4738da51b3
+    jinja: '{% set instance = [0, 1, 2, 3] | choice %}
+      
+      이 설명을 먼저 보세요: {{ ctx_a }}
+      
+      다음 문장은 위 문장에 잘 이어집니까?
+      
+      {{ ctx_b }} {{ endings[instance] }}
+      
+      |||
+      
+      {% if label  == instance | string() %}
+      
+      {{answer_choices[0]}}
+      
+      {% else %}
+      
+      {{answer_choices[1]}}
+      
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: Appropriate continuation - Yes or No
+    reference: 'The template checks if the two contexts are valid continuations. '
+  6e9f8d7d-9016-45bc-b997-c42aeb2dc944: !Template
+    answer_choices: '{{ endings | join("|||") }}'
+    id: 6e9f8d7d-9016-45bc-b997-c42aeb2dc944
+    jinja: '이 문장 어떻게 끝나?
+
+      {{ctx}}
+
+
+      (a)  {{answer_choices[0]}}
+
+
+      (b)  {{answer_choices[1]}}
+
+
+      (c)  {{answer_choices[2]}}
+
+
+      (d)  {{answer_choices[3]}}
+
+
+      아, 참고로 주제는 {{activity_label}}야.
+
+      |||
+
+      {{answer_choices [label | int()]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Predict ending with hint
+    reference: Predict the ending with the activity label as the hint
+  a8ab00ee-78ad-465b-bbf0-9cd3d242dd7e: !Template
+    answer_choices: null
+    id: a8ab00ee-78ad-465b-bbf0-9cd3d242dd7e
+    jinja: '{{endings[label | int()]}}
+
+      이 앞의 문장이 뭐였을까?
+
+      |||
+
+      {{ctx}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Open-ended start
+    reference: Template asks the model to generate a premise or start for the ending
+  d95b81c4-5db7-44c1-926e-c7222c896a32: !Template
+    answer_choices: 예 ||| 아니오
+    id: d95b81c4-5db7-44c1-926e-c7222c896a32
+    jinja: '{% set instance = [0, 1, 2, 3] | choice %}
+      
+      {{ ctx_b }} {{ endings[instance] }} 이 문장은
+      
+      {{ ctx_a }} 이 문장 뒤에 이어지는 문장이 맞나요?
+      
+      예, 아니오로 답하세요.
+      
+      |||
+      
+      {% if label  == instance | string() %}
+      
+      {{answer_choices[0]}}
+      
+      {% else %}
+      
+      {{answer_choices[1]}}
+      
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: Reversed appropriate continuation - Yes or No
+    reference: The template randomly selects a continuation and checks if the continuation
+      is appropriate for the given premise.
+  db8b1c25-f2db-4604-b8fc-f93d69d6fae7: !Template
+    answer_choices: 보기 1 ||| 보기 2 ||| 보기 3 ||| 보기 4
+    id: db8b1c25-f2db-4604-b8fc-f93d69d6fae7
+    jinja: '{{ ctx }}...
+
+      이 문장이 어떻게 끝날 것 같나요?
+
+
+      보기 1: {{ endings[0] }}
+
+
+      보기 2: {{ endings[1] }}
+
+
+      보기 3: {{ endings[2] }}
+
+
+      보기 4: {{ endings[3] }}
+
+      ||| {{ answer_choices[label | int()] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: how_ends
+    reference: ''
+  def77598-682f-48de-b187-55db4d390f07: !Template
+    answer_choices: 문장 1 ||| 문장 2 ||| 문장 3 ||| 문장 4
+    id: def77598-682f-48de-b187-55db4d390f07
+    jinja: '{{ ctx }}... 상황이 이렇게 시작되면 어떻게 이어질까?
+      
+
+      문장 1: {{ endings[0] }}
+      
+
+      문장 2: {{ endings[1] }}
+      
+
+      문장 3: {{ endings[2] }}
+      
+
+      문장 4: {{ endings[3] }}
+      
+      |||
+      
+      {{answer_choices[label | int()] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: if_begins_how_continues
+    reference: Returns a Ending <int> string in the template (similar to how ends
+      paraphrased)

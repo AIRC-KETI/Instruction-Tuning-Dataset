@@ -1,0 +1,104 @@
+dataset: quarel
+templates:
+  5904fd73-b1ee-4f89-b7bc-b0fe8cc07c66: !Template
+    answer_choices: '{{world_literals.world1[0]}} ||| {{world_literals.world2[0]}}'
+    id: 5904fd73-b1ee-4f89-b7bc-b0fe8cc07c66
+    jinja: '질문: {{question}}
+
+
+      A와 B를 이용하여 답하지 말고 "{{answer_choices[0]}}"과 "{{answer_choices[1]}}" 중 하나를 선택하세 답하세요.
+
+      |||
+
+      {{answer_choices[answer_index]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: do_not_use
+    reference: ''
+  5b5f9d29-0ad5-4bb9-831a-11fcb115c10d: !Template
+    answer_choices: '{{world_literals.world1[0]}} ||| {{world_literals.world2[0]}}'
+    id: 5b5f9d29-0ad5-4bb9-831a-11fcb115c10d
+    jinja: '논리력 테스트 문제!
+    
+      {{question}}
+
+
+      답은 "{{answer_choices[0]}}"일까요 "{{answer_choices[1]}}"일까요?
+
+      |||
+
+      {{answer_choices[answer_index]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: logic_test
+    reference: ''
+  63c58389-605a-42b9-85a6-a2586a954a92: !Template
+    answer_choices: '{{world_literals.world1[0]}} ||| {{world_literals.world2[0]}}'
+    id: 63c58389-605a-42b9-85a6-a2586a954a92
+    jinja: '이 글을 읽어보세요: {{question}}.
+
+
+      "{{answer_choices[0]}}"와 "{{answer_choices[1]}}" 중에 더 알맞은 대답은 무엇인가요?
+
+      |||
+
+      {{answer_choices[answer_index]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: heres_a_story
+    reference: ''
+  73a7adbb-41b1-4b4d-b378-d7e17d030a6f: !Template
+    answer_choices: '{{world_literals.world1[0]}} ||| {{world_literals.world2[0]}}'
+    id: 73a7adbb-41b1-4b4d-b378-d7e17d030a6f
+    jinja: '선택지 1: "{{answer_choices[0]}}", 선택지 2: "{{answer_choices[1]}}".
+
+      질문: {{question}}
+
+      |||
+
+      {{answer_choices[answer_index]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: choose_between
+    reference: ''
+  92013fab-5387-44d4-bf0f-e29a31bcafb6: !Template
+    answer_choices: '{{world_literals.world1[0]}} ||| {{world_literals.world2[0]}}'
+    id: 92013fab-5387-44d4-bf0f-e29a31bcafb6
+    jinja: '저는 논술 선생님입니다. 학생들에게 깜짝 퀴즈를 내고 싶어요.
+
+      질문: {{question}}
+
+      둘 중에 정답이 무엇인가요? "{{answer_choices[0]}}"? "{{answer_choices[1]}}"?
+
+      |||
+
+      {{answer_choices[answer_index]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: testing_students
+    reference: ''

@@ -1,0 +1,237 @@
+dataset: race
+templates:
+  00ede994-778f-4d25-82dc-bae7ba9e115f: !Template
+    answer_choices: A ||| B ||| C ||| D
+    id: 00ede994-778f-4d25-82dc-bae7ba9e115f
+    jinja: '나 시험 보고 있는데 이 글 다음에 나오는 질문에 답해줘.
+
+      기사: {{article}}
+
+      질문: {{question}}
+
+      선택지: {{"A"}}: {{options.0}}
+
+      {{"B"}}: {{options.1}}
+
+      {{"C"}}: {{options.2}}
+
+      {{"D"}}: {{options.3}}
+
+      |||
+
+      {{answer}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Taking a test
+    reference: ''
+  02ed2a0c-b3a4-4b86-8524-e8961f042ae9: !Template
+    answer_choices: null
+    id: 02ed2a0c-b3a4-4b86-8524-e8961f042ae9
+    jinja: '다음 기사에 대한 객관식 질문을 작성하세요:
+      
+      기사: {{article}}
+
+      |||
+      
+      질문:
+      {{question}}
+      
+      선택지:
+      {{"A"}} {{options.0}}
+      
+      {{"B"}} {{options.1}}
+      
+      {{"C"}} {{options.2}}
+      
+      {{"D"}} {{options.3}}
+      
+      답변:
+      {{answer}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Write a multi-choice question for the following article
+    reference: ''
+  59b5c4e3-9539-449f-ac60-04e681c705b5: !Template
+    answer_choices: '{{ options | join("|||") }}'
+    id: 59b5c4e3-9539-449f-ac60-04e681c705b5
+    jinja: '다음 글을 읽고 물음에 답해보세요..
+
+      글: {{article}}
+
+      물음: {{question}}
+
+      답:
+
+      |||
+
+      {{ answer_choices[{"A":0,"B":1,"C":2,"D":3}[answer]] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Read the article and answer the question (no option)
+    reference: ''
+  81368f4b-817f-4c81-9db5-b86905bb975e: !Template
+    answer_choices: '{{ options | join("|||") }}'
+    id: 81368f4b-817f-4c81-9db5-b86905bb975e
+    jinja: '다음 글을 읽고 가장 적절한 답을 선택하세요.
+
+      글: {{article}}
+
+      질문: {{question}}
+
+      - {{answer_choices | join("\n- ")}}
+
+      |||
+
+      {{answer_choices[{"A":0,"B":1,"C":2,"D":3}[answer]]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Select the best answer (generate span)
+    reference: ''
+  b808b05e-0d2a-459e-b345-2d83cdb20216: !Template
+    answer_choices: 네 ||| 아니요
+    id: b808b05e-0d2a-459e-b345-2d83cdb20216
+    jinja: '{% set candidate = ["A", "B", "C", "D"] | choice %}
+
+      문단: {{article}}
+
+      문제: {{question}}
+
+      답이 "{{ [options.0,options.1,options.2,options.3][{"A":0,"B":1,"C":2,"D":3}[candidate]] }}"인가요? 네, 아니요로 답하세요.
+
+      |||
+
+      {% if candidate == answer %}
+
+      네
+
+      {% else %}
+
+      아니요
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: Is this the right answer
+    reference: ''
+  cce2b02b-6c47-4941-83d6-5ecb2dfedadc: !Template
+    answer_choices: null
+    id: cce2b02b-6c47-4941-83d6-5ecb2dfedadc
+    jinja: '주어진 선택지와 답변을 사용하여 다음 기사에 대한 객관식 질문을 작성하세요:
+    
+
+      기사: {{article}}
+
+      
+      선택지:
+      
+      {{"A"}} {{options.0}}
+      
+      {{"B"}} {{options.1}}
+      
+      {{"C"}} {{options.2}}
+      
+      {{"D"}} {{options.3}}
+      
+
+      정답:
+      
+      {{answer}} {{ [options.0,options.1,options.2,options.3][{"A":0,"B":1,"C":2,"D":3}[answer]] }}
+      
+
+      질문:
+      
+      |||
+      
+      {{question}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Write a multi-choice question (options given)
+    reference: ''
+  e5c4d6a3-ff68-4243-93aa-2629e72d0d70: !Template
+    answer_choices: A ||| B ||| C ||| D
+    id: e5c4d6a3-ff68-4243-93aa-2629e72d0d70
+    jinja: '기사를 읽고 가장 적절한 답변을 선택하세요.
+
+      기사: {{article}}
+
+      질문: {{question}}
+
+      옵션: {{"A"}}: {{options.0}}
+
+      {{"B"}}: {{options.1}}
+
+      {{"C"}}: {{options.2}}
+
+      {{"D"}}: {{options.3}}
+
+      |||
+
+      {{answer}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Select the best answer
+    reference: ''
+  f79ba457-3c44-455f-a6ed-9c5f50d0e886: !Template
+    answer_choices: A ||| B ||| C ||| D
+    id: f79ba457-3c44-455f-a6ed-9c5f50d0e886
+    jinja: '{{article}}
+
+      {{question}}
+
+      {{"A)"}} {{options.0}}
+
+      {{"B)"}} {{options.1}}
+
+      {{"C)"}} {{options.2}}
+
+      {{"D)"}} {{options.3}}
+
+      |||
+
+      {{answer}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Select the best answer (no instructions)
+    reference: ''

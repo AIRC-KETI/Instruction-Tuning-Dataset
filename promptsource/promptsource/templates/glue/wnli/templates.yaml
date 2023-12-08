@@ -1,0 +1,102 @@
+dataset: glue
+subset: wnli
+templates:
+  10c354ee-6f4e-4b04-91e1-29e999a8f3e7: !Template
+    answer_choices: 신뢰하면 안됩니다. ||| 신뢰해도 됩니다.
+    id: 10c354ee-6f4e-4b04-91e1-29e999a8f3e7
+    jinja: '{{sentence1}}가 사실이라면 {{sentence2}}도 신뢰해도 될까요?
+      
+      |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: confident
+    reference: ''
+  3a0e46cb-0b96-4972-83f6-29a6c6a09ba9: !Template
+    answer_choices: 아닙니다 ||| 맞습니다
+    id: 3a0e46cb-0b96-4972-83f6-29a6c6a09ba9
+    jinja: '{{"수반"}}은 첫 번째 문장 뒤에 두 번째 문장이 오는 것을 의미합니다.
+      다음 두 문장은 수반의 예시인가요?
+
+      {{sentence1}}
+
+      {{sentence2}}
+
+      |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: entailment explained
+    reference: ''
+  75f89b05-5a81-401b-8a04-8239211a9a95: !Template
+    answer_choices: 아니요 ||| 네
+    id: 75f89b05-5a81-401b-8a04-8239211a9a95
+    jinja: '다음이 참이라고 가정하자:
+
+      {{sentence1}}
+
+      그럼 이것도 참인가? "{{sentence2}}"?
+
+      |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: mean
+    reference: ''
+  a244158a-a248-4e34-bef7-66e269dd0815: !Template
+    answer_choices: 아니요 ||| 네
+    id: a244158a-a248-4e34-bef7-66e269dd0815
+    jinja: '누가 나한테 "{{sentence1}}"라고 말해서 내가 "{{sentence2}}"라고 생각했어.
+      내가 이런 생각이 드는 게 맞는 거지?
+
+      |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: justified
+    reference: ''
+  a2ce492b-dfd0-4f04-bc44-70c7867ba231: !Template
+    answer_choices: 아니요 ||| 네
+    id: a2ce492b-dfd0-4f04-bc44-70c7867ba231
+    jinja: '{{sentence1}}
+
+      {{sentence2}}
+
+      첫 번째 문장이 두 번째 문장을 암시하나요?
+
+      |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: imply
+    reference: ''

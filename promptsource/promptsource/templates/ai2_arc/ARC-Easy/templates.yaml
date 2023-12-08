@@ -1,0 +1,142 @@
+dataset: ai2_arc
+subset: ARC-Easy
+templates:
+  033498ca-3d9a-47e3-b631-d881ab53b5ad: !Template
+    answer_choices: '{{choices.label | join("|||")}}'
+    id: 033498ca-3d9a-47e3-b631-d881ab53b5ad
+    jinja: '다음 질문에 답하기 위해 가장 정확한 옵션을 선택하십시오.
+
+
+      {{question}}
+
+
+      옵션:
+
+      {% for letter, t in zip(answer_choices, choices.text) %}
+
+      - {{letter}}: {{t}}
+
+      {% endfor %} |||
+
+      {{answerKey}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: pick_the_most_correct_option
+    reference: ''
+  252aa566-9482-4e81-aad9-664a9bebd8e8: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: 252aa566-9482-4e81-aad9-664a9bebd8e8
+    jinja: '{{question}}
+
+
+      보기:
+
+      - {{answer_choices | join("\n- ")}}|||
+
+      {{answer_choices[choices["label"].index(answerKey)]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: qa_options
+    reference: ''
+  4fb13ac1-f770-45ea-b5d5-91ac50b0d609: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: 4fb13ac1-f770-45ea-b5d5-91ac50b0d609
+    jinja: '다음 질문에 답하기 위해 4가지 선택지 중에서 망설이고 있는데, 어떤 선택지를 선택해야 할까요?
+
+      질문: {{question}}
+
+      선택지:
+
+      - {{answer_choices | join("\n- ")}}|||
+
+      {{answer_choices[choices["label"].index(answerKey)]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: i_am_hesitating
+    reference: ''
+  8c689423-880d-402b-8c7d-a1a98c7589e8: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: 8c689423-880d-402b-8c7d-a1a98c7589e8
+    jinja: '나는 학생들에게 이 객관식 문제를 주었다: {{question}}
+
+
+      이 네 가지 선택지 중에서 단 하나의 정답만 정답이다:
+
+      - {{answer_choices | join("\n- ")}}
+
+
+      어떤 것이 맞는지 선택해라.|||
+
+      {{answer_choices[choices["label"].index(answerKey)]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: multiple_choice
+    reference: ''
+  c988ee30-a523-457b-af21-87353349b543: !Template
+    answer_choices: null
+    id: c988ee30-a523-457b-af21-87353349b543
+    jinja: '다음 질문에 대한 모든 잘못된 옵션을 선택하고 복사하십시오:
+
+
+      {{question}}
+
+
+      옵션:
+
+      - {{choices["text"] | join("\n- ")}}|||
+
+      {% for i in range(choices["label"]|length) %}
+
+      {% if i != choices["label"].index(answerKey) %}
+
+      - {{choices["text"][i]}}
+
+      {% endif %}
+
+      {% endfor %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      - Other
+      original_task: false
+    name: pick_false_options
+    reference: ''
+  d90da519-0e2c-4f9b-a546-7cba82824eb2: !Template
+    answer_choices: '{{choices.label | join("|||")}}'
+    id: d90da519-0e2c-4f9b-a546-7cba82824eb2
+    jinja: "여기 풀어야 할 문제가 있습니다: {{question}}\n\n\
+      다음의 네 가지 선택지 중에서 정답은 무엇인가요?\n\
+      {% for letter, t in zip(answer_choices, choices.text) %}\n\
+      - {{letter}}: {{t}}\n {% endfor %}|||{{answerKey}}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: heres_a_problem
+    reference: ''

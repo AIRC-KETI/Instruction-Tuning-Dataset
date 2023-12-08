@@ -1,0 +1,253 @@
+dataset: duorc
+subset: ParaphraseRC
+templates:
+  09adcadd-fa7b-4154-91cb-fe822bf8e00e: !Template
+    answer_choices: null
+    id: 09adcadd-fa7b-4154-91cb-fe822bf8e00e
+    jinja: '{% if no_answer == false %}
+
+      이걸 바탕으로 영화 줄거리를 만들어줘: {{ question }} {{answers|choice}}
+
+      |||
+
+      {{ plot }}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: build_story_around_qa
+    reference: Given the question-answer pair, generate a relevant plot.
+  0c7049c0-750a-46b7-af38-dd1e9fcb5217: !Template
+    answer_choices: null
+    id: 0c7049c0-750a-46b7-af38-dd1e9fcb5217
+    jinja: '저는 이 영화에 투자할 가치가 있는지 생각하고 있습니다.
+      몇 가지 질문에 대답해 주실 수 있나요? 할 수 없으면 "{{ "못하겠습니다" }}"라고 말씀해 주세요.
+
+
+      질문: {{ question }}
+
+      영화 제목: {{ title }}
+
+      줄거리: {{ plot }}
+
+      |||
+
+      {% if no_answer %}
+
+      못하겠습니다
+
+      {% else %}
+
+      {{ answers | choice }}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Squad
+      original_task: true
+    name: decide_worth_it
+    reference: ''
+  594d0551-d737-4680-a7a5-8393acc6dbb7: !Template
+    answer_choices: null
+    id: 594d0551-d737-4680-a7a5-8393acc6dbb7
+    jinja: '질문: {{ question }}
+
+      답변이 없을 경우 "{{ "답변을 제공하기엔 정보가 부족합니다." }}"라고 하세요.
+
+      영화 제목: {{ title }}
+
+      영화 줄거리: {{ plot }}
+
+      |||
+
+      {% if no_answer %}
+
+      답변을 제공하기엔 정보가 부족합니다.
+
+      {% else %}
+
+      {{ answers | choice }}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Squad
+      original_task: true
+    name: question_answering
+    reference: Given a passage and a question, generate an answer.
+  805f121a-6bd4-4803-9428-ea733f385add: !Template
+    answer_choices: null
+    id: 805f121a-6bd4-4803-9428-ea733f385add
+    jinja: '안녕하세요. 저는 영화 감독입니다. 방금 다음과 같은 영화 줄거리를 받았어요.
+      영화에 대해서 잘 파악하기 위해 질문을 준비했는데 이 질문에 대답하는데 도움을 주실 수 있나요? 힘들면 "{{ "대답할 수 없어요" }}"라고 답해주세요.
+
+
+      제목: {{title}}
+
+      내용: {{plot}}
+
+      질문: {{question}}
+
+      |||
+
+      {% if no_answer %}
+
+      대답할 수 없어요
+
+      {% else %}
+
+      {{answers|choice}}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Squad
+      original_task: true
+    name: movie_director
+    reference: ''
+  842e346b-2d26-43a2-9a3a-9154f04eb76a: !Template
+    answer_choices: null
+    id: 842e346b-2d26-43a2-9a3a-9154f04eb76a
+    jinja: '다음 영화 줄거리에 대한 질문을 하나 생성하세요: {{ plot }}
+
+      |||
+
+      {{ question }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: generate_question
+    reference: Given the plot, generate a question.
+  945053f7-6ad3-4c08-b7dd-5413564f7467: !Template
+    answer_choices: null
+    id: 945053f7-6ad3-4c08-b7dd-5413564f7467
+    jinja: '영화 줄거리에서 다음 질문에 대한 답을 찾아보세요.
+      답을 찾을 수 없으면 "{{ "답할 수 없는 질문입니다" }}"라고 이야기 해주세요.
+
+      질문: {{question}}
+
+      제목: {{title}}
+
+      줄거리: {{plot}}
+
+      |||
+
+      {% if no_answer %}
+
+      답할 수 없는 질문입니다
+
+      {% else %}
+
+      {{answers | choice }}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Squad
+      original_task: true
+    name: extract_answer
+    reference: ''
+  a8597645-cfed-4f54-ba0d-c23eaafaa131: !Template
+    answer_choices: null
+    id: a8597645-cfed-4f54-ba0d-c23eaafaa131
+    jinja: '줄거리만 보고 영화 제목 맞춰봐: {{plot}}
+
+      |||
+
+      {{title}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: title_generation
+    reference: Given the plot for the movie, suggest a title.
+  c6f75398-a993-44d6-a494-78961a7dc1b7: !Template
+    answer_choices: null
+    id: c6f75398-a993-44d6-a494-78961a7dc1b7
+    jinja: '이 영화 줄거리에 대한 다음 질문에 답해 주세요. 답변할 수 없는 경우에는 "{{ "답변 불가" }}"를 출력해 주세요.
+
+
+      질문: {{question}}
+
+      영화 제목: {{title}}
+
+      영화 줄거리: {{plot}}
+
+      |||
+
+      {% if no_answer %}
+
+      답변 불가
+
+      {% else %}
+
+      {{answers | choice }}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Squad
+      original_task: true
+    name: answer_question
+    reference: ''
+  ce3649d8-fd90-4a77-8819-4eb20b1c83a9: !Template
+    answer_choices: null
+    id: ce3649d8-fd90-4a77-8819-4eb20b1c83a9
+    jinja: '{% if no_answer == false %}
+    
+      다음과 같은 대답이 나올 수 있는 질문을 만드세요:
+      
+      
+      {{ answers | choice }}
+      
+      
+      영화 줄거리는 다음과 같습니다:
+      
+      {{ plot }}
+      
+      |||
+      
+      {{ question }}
+      
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: generate_question_by_answer
+    reference: Given the passage and the answer, generate a question which has that
+      answer.

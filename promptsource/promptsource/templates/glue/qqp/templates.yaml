@@ -1,0 +1,98 @@
+dataset: glue
+subset: qqp
+templates:
+  8e711799-a57c-4941-833b-466bedfb80ad: !Template
+    answer_choices: 아니요 ||| 네
+    id: 8e711799-a57c-4941-833b-466bedfb80ad
+    jinja: '저는 웹사이트 쿼라의 관리자입니다. "{{question1}}"를 묻는 게시물과
+      "{{question2}}"를 묻는 게시물이 있습니다. 동일한 질문을 하는 경우엔 병합할 수 있습니다.
+      이 두 질문을 병합해도 될까요? ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: quora
+    reference: ''
+  94972071-a726-42a3-a726-13f414b65e67: !Template
+    answer_choices: 중복되지 않음 ||| 중복
+    id: 94972071-a726-42a3-a726-13f414b65e67
+    jinja: '{{question1}}
+
+      {{question2}}
+
+      하나를 고르세요: 두 질문은 "{{"중복"}}"입니까 "{{"중복되지 않음"}}"입니까?
+
+      |||
+
+      {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: duplicate or not
+    reference: ''
+  a45ad5cd-a3ba-4ab2-a728-a9ea0f27102b: !Template
+    answer_choices: 아니요 ||| 네
+    id: a45ad5cd-a3ba-4ab2-a728-a9ea0f27102b
+    jinja: '"{{question1}}"과 "{{question2}}"가 같은 질문인가요?
+      ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: same thing
+    reference: ''
+  c0182cd1-c7ac-4abe-829f-4651536af951: !Template
+    answer_choices: 아니요 ||| 네
+    id: c0182cd1-c7ac-4abe-829f-4651536af951
+    jinja: '"{{question1}}"에 대한 답변을 "{{question2}}"에 대한 답변으로 사용해도 되나요?
+      ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: answer
+    reference: ''
+  c0724198-97e7-44a1-89d8-c51e97ce0b04: !Template
+    answer_choices: 아니요 ||| 네
+    id: c0724198-97e7-44a1-89d8-c51e97ce0b04
+    jinja: '질문 1: {{question1}}
+
+      질문 2: {{question2}}
+
+
+      두 질문은 동일한 의미를 전달합니까? ||| {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: meaning
+    reference: ''
+  fd244bd3-ca3b-4e4f-9722-fd006c50e157: !Template
+    answer_choices: 아니요 ||| 네
+    id: fd244bd3-ca3b-4e4f-9722-fd006c50e157
+    jinja: '내가 학교에서 강의를 하는데 이 질문들을 받았어. 같은걸 물어보는 질문인가? "{{question1}}" "{{question2}}". ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: duplicate
+    reference: ''

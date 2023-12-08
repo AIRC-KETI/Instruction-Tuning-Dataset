@@ -1,0 +1,102 @@
+dataset: ag_news
+templates:
+  24e44a81-a18a-42dd-a71c-5b31b2d2cb39: !Template
+    answer_choices: 세계 정치 ||| 스포츠 ||| 비즈니스 ||| 과학 기술
+    id: 24e44a81-a18a-42dd-a71c-5b31b2d2cb39
+    jinja: "이 뉴스 기사를 가장 잘 설명하는 분류는 무엇입니까?\n{{text}} ||| \n{{answer_choices[label]}}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: classify_question_first
+    reference: ''
+  8fdc1056-1029-41a1-9c67-354fc2b8ceaf: !Template
+    answer_choices: 세계 정치 ||| 스포츠 ||| 비즈니스 ||| 과학 기술
+    id: 8fdc1056-1029-41a1-9c67-354fc2b8ceaf
+    jinja: "이것은 {{\"세계 정치, 스포츠, 비즈니스, 과학 기술\"}} 중 어느 것에 관한 뉴스입니까?\n{{text}} \n||| \n{{answer_choices[label]}}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: classify_with_choices_question_first
+    reference: ''
+  918267e0-af68-4117-892d-2dbe66a58ce9: !Template
+    answer_choices: 정치인 ||| 운동선수 ||| 비즈니스 임원 ||| 과학자
+    id: 918267e0-af68-4117-892d-2dbe66a58ce9
+    jinja: '{{"정치인"}}, {{"운동선수"}}, {{"비즈니스 임원"}}, {{"과학자"}} 중 누구에게 다음 기사를 추천하시겠습니까?
+
+
+      {{ text }}
+
+      |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: recommend
+    reference: ''
+  9345df33-4f23-4944-a33c-eef94e626862: !Template
+    answer_choices: 세계 뉴스 ||| 스포츠 ||| 비즈니스 ||| 과학 기술
+    id: 9345df33-4f23-4944-a33c-eef94e626862
+    jinja: "{{text}} \n\n\
+      다음의 신문 섹션 중 이 기사가 나타날 가능성이 높은 것은? \
+      {{\"세계 뉴스\"}}, {{\"스포츠\"}}, {{\"비즈니스\"}}, {{\"과학 기술\"}} ||| \n{{answer_choices[label]}}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: which_section_choices
+    reference: ''
+  98534347-fff7-4c39-a795-4e69a44791f7: !Template
+    answer_choices: 세계 뉴스 ||| 스포츠 ||| 비즈니스 ||| 과학 기술
+    id: 98534347-fff7-4c39-a795-4e69a44791f7
+    jinja: "{{text}} \n\n신문 어느 섹션에 이 기사가 어울리는지 알려줘. ||| \n{{answer_choices[label]}}에 어울립니다."
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: which_section
+    reference: ''
+  b401b0ee-6ffe-4a91-8e15-77ee073cd858: !Template
+    answer_choices: 세계 정치 ||| 스포츠 ||| 비즈니스 ||| 과학 기술
+    id: b401b0ee-6ffe-4a91-8e15-77ee073cd858
+    jinja: "{{text}} \n이 기사가 {{\"세계 정치, 스포츠, 비즈니스, 과학 기술\"}} 중 어느 것에 대한 뉴스야? ||| \n{{answer_choices[label]}}에 대한 뉴스입니다,"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: classify_with_choices
+    reference: ''
+  cb355f33-7e8c-4455-a72b-48d315bd4f60: !Template
+    answer_choices: 세계 정치 ||| 스포츠 ||| 비즈니스 ||| 과학 기술
+    id: cb355f33-7e8c-4455-a72b-48d315bd4f60
+    jinja: "{{text}} \n이 뉴스 기사를 가장 잘 설명하는 레이블은 무엇입니까? ||| \n{{answer_choices[label]}}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: classify
+    reference: ''

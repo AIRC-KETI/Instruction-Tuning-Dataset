@@ -1,0 +1,77 @@
+dataset: dbpedia_14
+templates:
+  824ecb55-ecad-40c2-8033-f2fa0add2ddf: !Template
+    answer_choices: 회사 ||| 교육 기관 ||| 예술가 ||| 운동선수 |||
+      공무원 ||| 교통 수단 ||| 건물 ||| 자연 |||
+      마을 ||| 동물 ||| 식물 ||| 음반 ||| 영화 ||| 출판물
+    id: 824ecb55-ecad-40c2-8033-f2fa0add2ddf
+    jinja: '{{content}} 카테고리 목록을 드릴게요: {{"회사, 교육 기관,
+      예술가, 운동선수, 공무원, 교통 수단, 건물, 자연,
+      마을, 동물, 식물, 음반, 영화, 출판물"}}
+      
+      앞의 문단은 어떤 카테고리에 속하나요?
+      ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: given_list_what_category_does_the_paragraph_belong_to
+    reference: ''
+  8eda7e71-6734-486f-b883-e99d3f14c0bf: !Template
+    answer_choices: 회사 ||| 교육 기관 ||| 예술가 ||| 운동선수 |||
+      공무원 ||| 교통 수단 ||| 건물 ||| 자연 |||
+      마을 ||| 동물 ||| 식물 ||| 음반 ||| 영화 ||| 출판물
+    id: 8eda7e71-6734-486f-b883-e99d3f14c0bf
+    jinja: '다음 글에 대한 카테고리를 하나 선택하세요.
+      
+      - {{"회사, 교육 기관, 예술가, 운동선수, 공무원, 교통 수단, 건물, 자연, 마을, 동물, 식물, 음반, 영화, 출판물"}}.
+
+      {{title}} - {{content}} ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: pick_one_category_for_the_following_text
+    reference: ''
+  9dfa5d15-96bc-41ee-ad89-4f8df5c4ff67: !Template
+    answer_choices: 회사 ||| 교육 기관 ||| 예술가 ||| 운동선수 |||
+      공무원 ||| 교통 수단 ||| 건물 ||| 자연 |||
+      마을 ||| 동물 ||| 식물 ||| 음반 ||| 영화 ||| 출판물
+    id: 9dfa5d15-96bc-41ee-ad89-4f8df5c4ff67
+    jinja: '{{title}} - {{content}} 알맞은 카테고리를 선택하세요. {{"회사, 교육 기관,
+      예술가, 운동선수, 공무원, 교통 수단, 건물, 자연,
+      마을, 동물, 식물, 음반, 영화, 출판물"}} 중 어느 것을 나타내나요? ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: 'given_a_choice_of_categories '
+    reference: ''
+  f72fa410-3278-4f62-91f0-f9edf4a4e792: !Template
+    answer_choices: 회사 ||| 교육 기관 ||| 예술가 ||| 운동선수 |||
+      공무원 ||| 교통 수단 ||| 건물 ||| 자연 |||
+      마을 ||| 동물 ||| 식물 ||| 음반 ||| 영화 ||| 출판물
+    id: f72fa410-3278-4f62-91f0-f9edf4a4e792
+    jinja: '"{{title}}", 카테고리 목록: {{"회사, 교육 기관,
+      예술가, 운동선수, 공무원, 교통 수단, 건물, 자연,
+      마을, 동물, 식물, 음반, 영화, 출판물"}}
+      
+      이 제목은 어떤 범주에 속하나요? ||| {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: given_a_list_of_category_what_does_the_title_belong_to
+    reference: ''

@@ -1,0 +1,188 @@
+dataset: amazon_polarity
+templates:
+  1e90a24a-1182-43dd-9445-22f2e56e5761: !Template
+    answer_choices: 부정적입니다. ||| 긍정적입니다.
+    id: 1e90a24a-1182-43dd-9445-22f2e56e5761
+    jinja: '제목: {{title}}
+
+      리뷰: {{content}}
+
+      리뷰가 긍정적입니까, 부정적입니까? |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Is_this_review
+    reference: ''
+  3a48f287-6a4b-4df0-ab2d-2eaf6cb8e53d: !Template
+    answer_choices: 아니요, 추천하지 않습니다. ||| 예, 추천합니다.
+    id: 3a48f287-6a4b-4df0-ab2d-2eaf6cb8e53d
+    jinja: '이 리뷰에서 사용자가 이 제품을 추천합니까?
+
+      ===
+
+      리뷰: {{content}}
+
+      답: |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: User_recommend_this_product
+    reference: 'Reformulation equivalent to sent analysis: would the user recommend
+      this product?'
+  592caf8f-f8ff-426a-a61b-b7e95ed510b6: !Template
+    answer_choices: 아니요 ||| 네
+    id: 592caf8f-f8ff-426a-a61b-b7e95ed510b6
+    jinja: '이 상품평은 긍정적인가요?
+
+      제목: {{title}}
+
+      리뷰: {{content}}
+
+      답변: |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Is_this_product_review_positive
+    reference: ''
+  745b9c05-10df-4a7e-81ad-1b88cefcb166: !Template
+    answer_choices: 네 ||| 아뇨
+    id: 745b9c05-10df-4a7e-81ad-1b88cefcb166
+    jinja: '제목: {{title}}
+
+      리뷰: {{content}}
+
+      이 제품 리뷰는 부정적인가요?|||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: Is_this_review_negative
+    reference: ''
+  8abb5377-5dd3-4402-92a5-0d81adb6a325: !Template
+    answer_choices: 부정적입니다 ||| 긍정적입니다
+    id: 8abb5377-5dd3-4402-92a5-0d81adb6a325
+    jinja: '제목: {{title}}
+
+      리뷰: {{content}}
+
+      이 제품 리뷰는 부정적인가요 긍정적인가요?|||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: convey_negative_or_positive_sentiment
+    reference: ''
+  9df70cdf-f8ed-4e79-8e2f-b4668058d637: !Template
+    answer_choices: 부정적인 의견이 있습니다. ||| 긍정적인 의견이 있습니다.
+    id: 9df70cdf-f8ed-4e79-8e2f-b4668058d637
+    jinja: '이 제품 리뷰에 부정적이거나 긍정적인 의견이 있습니까??
+
+      ===
+
+      제목: {{title}}
+
+      리뷰: {{content}}
+
+      답: |||
+
+      {{answer_choices[label]}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: negative_or_positive_tone
+    reference: ''
+  b13369e8-0500-4e93-90d4-8e6814bfb97b: !Template
+    answer_choices: 불만족했습니다. ||| 만족했습니다.
+    id: b13369e8-0500-4e93-90d4-8e6814bfb97b
+    jinja: '다음은 고객이 제품에 남긴 리뷰입니다. 고객이 만족했다거나 불만족했다고 말할 수 있습니까?
+
+      제목: {{title}}
+
+      리뷰: {{content}}
+
+      |||
+
+      {{answer_choices[label]}} '
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: user_satisfied
+    reference: ''
+  b13369e8-0500-4e93-90d4-8e6814bfb98b: !Template
+    answer_choices: 줄어듭니다. ||| 늘어납니다.
+    id: b13369e8-0500-4e93-90d4-8e6814bfb98b
+    jinja: '제품 구매 여부를 고민하고 있는데 이 리뷰를 보면 제품 구매 가능성이 늘어날까요 줄어들까요?
+
+      리뷰 제목: {{title}}
+
+      제품 리뷰: {{content}}
+
+      |||
+
+      {{answer_choices[label]}} '
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: would_you_buy
+    reference: ''
+  b13369e8-0500-4e93-90d4-8e6814bfb99b: !Template
+    answer_choices: 호의적이지 않습니다. ||| 호의적입니다.
+    id: b13369e8-0500-4e93-90d4-8e6814bfb99b
+    jinja: '제목: {{title}}
+
+      제품 리뷰: {{content}}
+
+      이 리뷰는 제품에 대해 호의적입니까 그렇지 않습니까?
+
+      |||
+
+      {{answer_choices[label]}} '
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: flattering_or_not
+    reference: ''

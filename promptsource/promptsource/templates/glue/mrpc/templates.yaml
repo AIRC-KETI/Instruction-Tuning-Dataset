@@ -1,0 +1,160 @@
+dataset: glue
+subset: mrpc
+templates:
+  3b88d2c4-0aeb-4c6d-9ccc-653a388250a5: !Template
+    answer_choices: null
+    id: 3b88d2c4-0aeb-4c6d-9ccc-653a388250a5
+    jinja: '{% if label == 1 %}
+
+      다음 문장을 바꾸어 말하시오: {{sentence1}}
+
+      |||
+
+      {{sentence2}}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: generate_paraphrase
+    reference: ''
+  44c2e6d9-facf-4959-8400-38e0eb8dd3a8: !Template
+    answer_choices: 아니요 ||| 네
+    id: 44c2e6d9-facf-4959-8400-38e0eb8dd3a8
+    jinja: '저는 다음 두 문장이 같은 의미인지 알고 싶습니다.
+
+      {{sentence1}}
+
+      {{sentence2}}
+
+      같나요?
+
+      |||
+
+      {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: want to know
+    reference: ''
+  adf659af-4e2d-4e7e-ab89-b33cfc0b5a50: !Template
+    answer_choices: 아니요 ||| 네
+    id: adf659af-4e2d-4e7e-ab89-b33cfc0b5a50
+    jinja: '이 문장은
+
+      {{sentence1}}
+
+      이 문장과 같은 의미인가요?
+
+      {{sentence2}}
+
+      |||
+
+      {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: paraphrase
+    reference: ''
+  bbb395c2-2c70-4eaa-ad2f-2cf18a81da93: !Template
+    answer_choices: 동등하지 않아요 ||| 동등해요
+    id: bbb395c2-2c70-4eaa-ad2f-2cf18a81da93
+    jinja: '두 문장의 뜻은 동등한가요 아님 동등하지 않나요?
+
+      {{sentence1}}
+
+      {{sentence2}}
+
+      |||
+
+      {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: equivalent
+    reference: ''
+  d830d7a5-abc0-4275-ac62-974e0088876f: !Template
+    answer_choices: null
+    id: d830d7a5-abc0-4275-ac62-974e0088876f
+    jinja: '{% if label == 1 %}
+
+      이 문장과 같은 뜻을 가지는 다른 문장을 만들어줘: {{sentence1}}
+
+      |||
+
+      {{sentence2}}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: generate_sentence
+    reference: ''
+  ee82d511-908c-4244-804f-6d0d907c68c7: !Template
+    answer_choices: 아니요 ||| 네
+    id: ee82d511-908c-4244-804f-6d0d907c68c7
+    jinja: '이 문장을
+
+      {{sentence1}}
+
+      이 문장으로 바꿀 수 있어?
+
+      {{sentence2}}
+
+      두 문장이 같은 뜻이야?
+
+      |||
+
+      {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: replace
+    reference: ''
+  eefd8606-b936-4d26-b91d-8f4bc38bfcbf: !Template
+    answer_choices: 같은 뜻이 아닙니다 ||| 같은 뜻입니다
+    id: eefd8606-b936-4d26-b91d-8f4bc38bfcbf
+    jinja: '이 두 문장이 같은 뜻인지 알려줘.
+
+      {{sentence1}}
+
+      {{sentence2}}
+
+      |||
+
+      {{ answer_choices[label] }}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: same thing
+    reference: ''

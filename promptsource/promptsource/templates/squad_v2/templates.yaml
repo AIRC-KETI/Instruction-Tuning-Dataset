@@ -1,0 +1,395 @@
+dataset: squad_v2
+templates:
+  17b83a3f-f748-42e6-9cdf-b2951dd8299d: !Template
+    answer_choices: null
+    id: 17b83a3f-f748-42e6-9cdf-b2951dd8299d
+    jinja: '{% set seq = [
+
+      ''상황을 보고 질문에 답하세요.'',
+
+      ''답은 무엇인가요?'',
+
+      ] %}
+
+
+      {{ seq | choice }}
+
+      상황: {{context}};
+
+      질문: {{question}};
+
+      대답: |||
+
+      {% if answers.text == [] %}
+
+      답변할 수 없는 질문입니다
+
+      {% else %}
+
+      {{answers.text[0]}}
+
+      {% endif %}'
+    metadata: &id001 !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Squad
+      original_task: true
+    name: Questions with Context
+    reference: Given context and question, give answer
+  189dcc58-fd13-4771-ad03-7879a61c7ab7: !Template
+    answer_choices: null
+    id: 189dcc58-fd13-4771-ad03-7879a61c7ab7
+    jinja: '{% if answers.text != [] %}
+
+      주어진 상황과 대답을 보고 적절한 질문을 만드세요.
+
+      상황: {{context}};
+
+      대답: {{answers.text[0]}};
+
+      질문: |||
+
+      {{question}}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Jeopardy with Context
+    reference: Given context and an answer, guess the question.
+  20064b80-e4d0-41b7-9135-92c0077d5044: !Template
+    answer_choices: null
+    id: 20064b80-e4d0-41b7-9135-92c0077d5044
+    jinja: '{% set seq = [
+
+      ''이게 무슨 얘기야? '',
+
+      ''이 문단은 무엇에 관한 것인가? '',
+
+      ''주제 가져오기: '',
+
+      ''문장에서 주제를 찾아라'',
+
+      ''주제를 알고 싶습니다. '',
+
+      ''구절에서 화제가 되는 것은 다음과 같다: '',
+
+      ''이 문장 주제가 뭐게: '',
+
+      ] %}
+
+      {{ seq | choice }}
+
+      {{context}} |||
+
+      {{title | replace("_", " ")}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      - Other
+      original_task: false
+    name: Topic Prediction - Context with randomized prompt options
+    reference: Asks to predict the topic given the context with additional input as
+      if a person is asking another person.
+  338cc143-361e-4796-b035-31fb2201c49f: !Template
+    answer_choices: null
+    id: 338cc143-361e-4796-b035-31fb2201c49f
+    jinja: '{% set seq = [
+
+      ''이것은 무엇에 관한 것인가요? '',
+
+      ''이 이야기는 어떤 것에 대해 이야기하고 있나요? '',
+
+      ''문단은 다음에 관한 것이다. '',
+
+      ''문단은 무엇에 관한 것인가? '',
+
+      ''주제를 찾아라: '',
+
+      ''글로부터 주제를 알고 싶어요. '',
+
+      ''주제를 알고 싶다.. '',
+
+      ''다음 글의 주제는?: '',
+
+      ''문단에서 주로 이야기하고 있는 것이 무엇인가?: '',
+
+      ] %}
+
+      {{context}}
+
+      {{ seq | choice }}|||
+
+      {{title | replace("_", " ")}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      - Other
+      original_task: false
+    name: Topic Prediction - Context with randomized prompt options placed in the
+      end
+    reference: The prompt is placed at the end of Context
+  7a44cd99-7420-4456-aaaa-34e2c81d1679: !Template
+    answer_choices: null
+    id: 7a44cd99-7420-4456-aaaa-34e2c81d1679
+    jinja: '{% if answers.text != [] %}
+
+      다음과 같은 답을 줄 수 있는 질문은 무엇입니까?
+
+      답: {{answers.text[0]}};
+
+      질문: |||
+
+      {{question}}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Jeopardy without Context
+    reference: Given an answer, output a viable question. Context is omitted.
+  8bea1123-fd8d-4bac-96bf-b8a289ee74b3: !Template
+    answer_choices: null
+    id: 8bea1123-fd8d-4bac-96bf-b8a289ee74b3
+    jinja: '{% set seq = [
+
+      ''답을 말해줄 수 있나요? '',
+
+      ''궁금합니다. '',
+
+      ''말해주세요. '',
+
+      ''글에서, '',
+
+      ''알고 싶습니다 '',
+
+      ''묻고 싶어요. '',
+
+      ''이 질문의 답은 무엇인가요?: '',
+
+      ''답을 찾으세요: '',
+
+      ''답: '',
+
+      '''',
+
+      ] %}
+
+      {{context}} {{ seq | choice }}{{question}}|||
+
+      {% if answers.text == [] %}
+
+      지문에 답이 없습니다.
+
+      {% else %}
+
+      {{answers.text[0]}}
+
+      {% endif %}'
+    metadata: &id002 !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Squad
+      original_task: true
+    name: Questions with Context - Without Prompt Keywords
+    reference: Given context and question, give answer. No keywords to delineate context
+      and question is given.
+  b14c9843-fd56-42ff-817d-39e41963c847: !Template
+    answer_choices: null
+    id: b14c9843-fd56-42ff-817d-39e41963c847
+    jinja: '{% set seq = [
+
+      ''상황에 따라 질문에 답하세요.'',
+
+      ''대답은?'',
+
+      ] %}
+
+
+      {{ seq | choice }}
+
+      지문: {{context}};
+
+      질문: {{question}};
+
+      답변을 찾을 수 없는 경우 "답변 불가"로 응답해 주세요.
+
+      답: |||
+
+      {% if answers.text == [] %}
+
+      답변 불가
+
+      {% else %}
+
+      {{answers.text[0]}}
+
+      {% endif %}'
+    metadata: *id001
+    name: Questions with Context +unanswerable
+    reference: Given context and question, give answer
+  d768c181-1c9b-40c3-aa01-fc78c3b29875: !Template
+    answer_choices: null
+    id: d768c181-1c9b-40c3-aa01-fc78c3b29875
+    jinja: '{% if answers.text != [] %}
+
+      {{question}}|||
+
+      {{answers.text[0]}}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      original_task: false
+    name: Trivia
+    reference: Given input and directly outputs answer.
+  e1630107-8f5d-44ce-8ccd-6fa80da80328: !Template
+    answer_choices: null
+    id: e1630107-8f5d-44ce-8ccd-6fa80da80328
+    jinja: '{% set seq = [
+
+      ''알려주세요. '',
+
+      ''알려주실 수 있나요? '',
+
+      ''말해주세요. '',
+
+      ''위 글로 미루어 봤을 때, '',
+
+      ''궁금합니다. '',
+
+      ''물어볼게요. '',
+
+      ''이 질문의 정답은 무엇인가요?: '',
+
+      ''답을 찾으세요: '',
+
+      ''답: '',
+
+      '''',
+
+      ] %}
+
+      {{context}} {{ seq | choice }}{{question}} 답변을 찾을 수 없는 경우 "응답할 수 없음"으로 답변해 주세요. |||
+
+      {% if answers.text == [] %}
+
+      응답할 수 없음
+
+      {% else %}
+
+      {{answers.text[0]}}
+
+      {% endif %}'
+    metadata: *id002
+    name: Questions with Context - Without Prompt Keywords +unanswerable
+    reference: Given context and question, give answer. No keywords to delineate context
+      and question is given.
+  e2e41877-4794-4ff9-9f92-a2a85105e2a7: !Template
+    answer_choices: 네 ||| 아니요
+    id: e2e41877-4794-4ff9-9f92-a2a85105e2a7
+    jinja: '문단: {{context}};
+      
+      
+      질문: {{question}}
+      
+      
+      이 질문에 답할 수 있나요? |||
+      
+      {% if answers.text != [] %}
+      
+      {{answer_choices[0]}}
+      
+      {% else %}
+      
+      {{answer_choices[1]}}
+      
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: Unanwerable question
+    reference: The template checks if the question is answerable or not
+  e51c23b9-5b10-4db3-a0d1-ba546830173d: !Template
+    answer_choices: null
+    id: e51c23b9-5b10-4db3-a0d1-ba546830173d
+    jinja: '{% set seq = [
+
+      ''다음의 질문과 답변을 보고 말하고자 하는 주제를 적으시오. '',
+
+      ''주제는? '',
+
+      ''뭐에 대해서 이야기하고 있는 거야? '',
+
+      ] %}
+
+      {% if answers.text != [] %}
+
+      {{ seq | choice }}
+
+      질문: {{question}}; 답변: {{answers.text[0]}}; 주제: |||
+
+      {{title}}
+
+      {% endif %}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      - Other
+      original_task: false
+    name: Topic Prediction - Question and Answer Pair
+    reference: Given a Question-Answer pair, generate the topic.
+  fdcf132e-6c70-4188-999e-93601ee8e089: !Template
+    answer_choices: null
+    id: fdcf132e-6c70-4188-999e-93601ee8e089
+    jinja: '이 글이 뭐에 관한 거야?
+
+      {{context}} |||
+
+      {{title | replace("_", " ")}}'
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - BLEU
+      - ROUGE
+      - Other
+      original_task: false
+    name: Topic Prediction - Context
+    reference: Predict the topic from the passage

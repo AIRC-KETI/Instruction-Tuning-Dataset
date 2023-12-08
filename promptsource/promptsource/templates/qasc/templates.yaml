@@ -1,0 +1,132 @@
+dataset: qasc
+templates:
+  3e1e6ca0-b95e-4e68-bb6a-cd47c8429658: !Template
+    answer_choices: 예 ||| 아니요
+    id: 3e1e6ca0-b95e-4e68-bb6a-cd47c8429658
+    jinja: "{{combinedfact[0]|capitalize}}{{ combinedfact[1:]|trim('.') }}라고 말하고, \
+      \"{{ question[0]|lower }}{{ question[1:] }}\"라고 묻는다면, \
+      정답은\"{{ choices.text[0][0]|lower}}{{ choices.text[0][1:]|trim('.') }}\"일까요?\n\n\
+      |||\n\n{% if answerKey == choices.label[0] %} Yes {% else %} No {% endif %}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: is_correct_1
+    reference: ''
+  40ef67db-dff3-4e7b-b167-f7e54b400c74: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: 40ef67db-dff3-4e7b-b167-f7e54b400c74
+    jinja: "{{ fact1[0]|capitalize }}{{ fact1[1:]|trim|trim('.') }}, 그리고 {{fact2[0]|lower }}{{ fact2[1:]|trim|trim('.') }}. \
+      이러한 사실을 고려할 때, 다음 옵션 중 {{ question[0]|lower }}{{question[1:]|trim('?') }}:\n\
+      - {{answer_choices | join(\"\\n- \") }}\n\n\
+      |||\n\n{% for choice in choices.label %} {% if choice == answerKey %}{{ answer_choices[loop.index - 1] }}{% endif %}{% endfor %}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: qa_with_separated_facts_1
+    reference: Question Answering with separated facts.
+  5d63c186-e047-49dd-b5fd-c4a574f6f0e2: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: 5d63c186-e047-49dd-b5fd-c4a574f6f0e2
+    jinja: "사실 1: {{ fact1[0]|capitalize }}{{ fact1[1:]|trim|trim('.') }}.\n\n\
+      사실 2: {{fact2[0]|capitalize }}{{ fact2[1:]|trim|trim('.') }}.\n\n\
+      위의 두 가지 사실을 고려했을 때, {{ question[0]|lower }}{{question[1:]|trim('?') }}?\n\n\
+      |||\n\n{% for choice in choices.label %} {% if choice == answerKey %}{{ answer_choices[loop.index - 1] }}{% endif %}{% endfor %}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: qa_with_separated_facts_3
+    reference: Question Answering with separated facts.
+  604dd379-21f1-4d30-af2f-22f9a8a97ceb: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: 604dd379-21f1-4d30-af2f-22f9a8a97ceb
+    jinja: "질문 \"{{ question }}\"과 답변 보기가 주어집니다:\n\
+      - {{answer_choices | join(\"\\n- \") }}\n\n\
+      이제 {{ fact1[0]|lower }}{{ fact1[1:]|trim|trim('.') }}와 {{fact2[0]|lower }}{{ fact2[1:]|trim|trim('.') }}를 알고 있을 때, \
+      가장 좋은 답을 선택하세요.\n\n\
+      |||\n\n{% for choice in choices.label %} {% if choice == answerKey %}{{ answer_choices[loop.index - 1] }}{% endif %}{% endfor %}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: qa_with_separated_facts_4
+    reference: Question Answering with separated facts.
+  67cb1b35-e5d4-490b-beb8-dc9c0be9c298: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: 67cb1b35-e5d4-490b-beb8-dc9c0be9c298
+    jinja: "\"{{ question }}\"라는 퀴즈를 풀어야해.\n\n\
+      하지만 답을 몰라서 선생님에게 힌트를 받아왔어. \
+      힌트는 \"{{ fact1[0]|lower }}{{ fact1[1:]|trim|trim('.') }}\"랑 \"{{fact2[0]|lower }}{{ fact2[1:]|trim|trim('.') }}\"야.\n\n\
+      그럼 퀴즈의 정답이 뭘까?\n\n\
+      |||\n\n{% for choice in choices.label %} {% if choice == answerKey %}{{ answer_choices[loop.index - 1] }}{% endif %}{% endfor %}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: qa_with_separated_facts_5
+    reference: Question Answering with separated facts.
+  b5b61423-8655-408d-a8e6-81a5eaaac2aa: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: b5b61423-8655-408d-a8e6-81a5eaaac2aa
+    jinja: "{{ combinedfact[0]|lower }}{{ combinedfact[1:]|trim|trim('.') }}면, {{ question[0]|lower }}{{question[1:]|trim|trim('?') }}?\n\n\
+      선택지:\n\
+      - {{answer_choices | join(\"\\n- \") }}\n\
+      |||\n\n{% for choice in choices.label %} {% if choice == answerKey %}{{ answer_choices[loop.index - 1] }}{% endif %}{% endfor %}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: qa_with_combined_facts_1
+    reference: ''
+  c251edaf-a063-40fe-bd49-038843fcdb23: !Template
+    answer_choices: 네 ||| 아니요
+    id: c251edaf-a063-40fe-bd49-038843fcdb23
+    jinja: "{{combinedfact[0]|lower}}{{ combinedfact[1:]|trim('.') }}는 점에서 \
+      \"{{ question[0]|lower }}{{ question[1:] }}\"라는 질문에 대한 정답이 \"{{ choices.text[1][0]|lower}}{{ choices.text[1][1:]|trim('.') }}\"라고 생각하시나요?\n\
+      |||\n{% if answerKey == choices.label[0] %} Yes {% else %} No {% endif %}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: false
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: false
+    name: is_correct_2
+    reference: ''
+  c7cd51f1-ea49-4d6a-a422-46624333b7b1: !Template
+    answer_choices: '{{choices.text | join("|||")}}'
+    id: c7cd51f1-ea49-4d6a-a422-46624333b7b1
+    jinja: "사실 1: {{ fact1[0]|capitalize }}{{ fact1[1:]|trim|trim('.') }}.\n\n\
+      사실 2: {{fact2[0]|capitalize }}{{ fact2[1:]|trim|trim('.') }}.\n\n\
+      위의 두 가지 사실을 고려하여 \"{{ question }}\"라는 질문에 다음 옵션에서 골라 답하세요:\
+      \n- {{answer_choices | join(\"\\n- \") }}\n\n\
+      |||\n\n{% for choice in choices.label %} {% if choice == answerKey %}{{ answer_choices[loop.index - 1] }}{% endif %}{% endfor %}"
+    metadata: !TemplateMetadata
+      choices_in_prompt: true
+      languages:
+      - en
+      metrics:
+      - Accuracy
+      original_task: true
+    name: qa_with_separated_facts_2
+    reference: Question Answering with separated facts.
